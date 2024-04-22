@@ -119,7 +119,7 @@ export default function Gallery() {
         </div>
       </div>
       <div id="resultReal" className="transition-opacity duration-1000 opacity-0 absolute flex md:flex-row flex-col items-center drop-shadow-lg bg-slate-100 rounded-[2em]">
-        <div className="m-5 md:w-[550px] md:h-[350px] flex flex-col items-center justify-center">
+        <div className="my-5 md:w-[550px] md:h-[350px] flex flex-col items-center justify-center">
           <h1 className="text-center text-4xl pt-10">You chose the <span className="text-green-600 font-bold">real artwork</span></h1>
           <h1 className='text-center py-5 text-xl w-3/4'>This image was painted by a human.<br></br>The AI painting still hangs in the museum.</h1>
           <button className="text-white text-xl border-2 rounded-full p-3 border-black bg-black" onClick={() => window.location.reload()}>Play Again</button> 
