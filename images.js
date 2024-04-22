@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { StaticImageData } from 'next/image';
-import Oil1 from '@/src/Oil1.webp'
+import Oil1 from '@/src/aiOil1.webp'
 import Oil2 from '@/src/Oil2.webp'
 import Oil4 from '@/src/Oil4.png'
 import aiOil5 from '@/src/aiOil5.webp'
+import aiOil6 from '@/src/aiOil6.webp'
+import aiOil7 from '@/src/aiOil7.webp'
 import RealOil1 from '@/src/RealOil1.jpeg'
 import RealOil2 from '@/src/RealOil2.jpeg'
 import RealOil3 from '@/src/RealOil3.jpeg'
@@ -12,6 +14,8 @@ import RealOil5 from '@/src/RealOil5.jpeg'
 import RealOil6 from '@/src/RealOil6.jpeg'
 import RealOil7 from '@/src/RealOil7.jpg'
 import RealOil8 from '@/src/RealOil8.jpg'
+import RealOil9 from '@/src/RealOil9.jpg'
+import RealOil10 from '@/src/RealOil10.jpeg'
 
   
 const oilAI1 = {
@@ -38,6 +42,13 @@ const oilAI3 = {
 const oilAI4 = {
   id: 11,
   image: aiOil5,
+  ai: true,
+  title: 'AI Generated',
+}
+
+const oilAI5 = {
+  id: 14,
+  image: aiOil6,
   ai: true,
   title: 'AI Generated',
 }
@@ -98,6 +109,20 @@ const oilReal8 = {
   title: 'Lady with an Ermine by Leonardo da Vinci'
 }
 
+const oilReal9 = {
+  id: 11,
+  image: RealOil9,
+  ai: false,
+  title: 'Christ Pantocrator of Saint Catherine Monastery'
+}
+
+const oilReal10 = {
+  id: 12,
+  image: RealOil10,
+  ai: false,
+  title: 'Portrait of Ludger Tom Ring the Younger'
+}
+
 export default [
     [
       oilAI1,
@@ -119,4 +144,9 @@ export default [
       oilReal7,
       oilReal8
     ],
+    [
+      oilReal9,
+      oilReal10,
+      oilAI5,
+    ]
 ]
