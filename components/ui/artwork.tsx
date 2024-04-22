@@ -1,17 +1,22 @@
 'use client'
 import * as React from 'react';
 import { StaticImageData } from 'next/image';
+import Oil1 from '@/src/Oil1.webp'
 import Oil2 from '@/src/Oil2.webp'
 import Oil4 from '@/src/Oil4.png'
 import RealOil1 from '@/src/RealOil1.jpeg'
 import RealOil2 from '@/src/RealOil2.jpeg'
+import RealOil3 from '@/src/RealOil3.jpeg'
+import RealOil4 from '@/src/RealOil4.jpeg'
+import RealOil5 from '@/src/RealOil5.jpeg'
+import RealOil6 from '@/src/RealOil6.jpeg'
 import frame2 from '@/src/frame2.png'
 import frame1 from '@/src/frame1.png'
 import ropes from '@/src/ropes.png'
 import test from 'node:test';
 
 var aiSelected = -1;
-var selectedID = 0;
+var resultUpdated = -1;
 
 type Art = {
   id: number;
@@ -23,6 +28,20 @@ type Art = {
 const oilAI1 = {
   id: 0,
   image: Oil2,
+  ai: true,
+  title: 'AI Generated',
+}
+
+const oilAI2 = {
+  id: 5,
+  image: Oil4,
+  ai: true,
+  title: 'AI Generated',
+}
+
+const oilAI3 = {
+  id: 8,
+  image: Oil1,
   ai: true,
   title: 'AI Generated',
 }
@@ -41,11 +60,57 @@ const oilReal2 = {
   title: 'The Arnolfini Portrait by Jan van Eyck',
 }
 
+const oilReal3 = {
+  id: 3,
+  image: RealOil3,
+  ai: false,
+  title: 'Unconscious Patient by Rembrandt',
+}
+
+const oilReal4 = {
+  id: 4,
+  image: RealOil4,
+  ai: false,
+  title: 'St. George & the Dragon by Uccello',
+}
+
+const oilReal5 = {
+  id: 6,
+  image: RealOil5,
+  ai: false,
+  title: 'Saint Jerome in his Study by Antonello da Messina',
+}
+
+const oilReal6 = {
+  id: 7,
+  image: RealOil6,
+  ai: false,
+  title: 'Saint Lucy by Francesco del Cossa',
+}
+
 const testGallery = [
   oilAI1,
   oilReal1,
   oilReal2,
-];
+]
+
+const galleries = [
+  [
+    oilAI1,
+    oilReal1,
+    oilReal2,
+  ],
+  [
+    oilReal6,
+    oilAI2,
+    oilReal4,
+  ],
+  [
+    oilReal3,
+    oilReal5,
+    oilAI3,
+  ],
+]
 
 export function revealElem(elem : HTMLElement | null) {
   if (elem == null) {
@@ -58,7 +123,7 @@ export function revealElem(elem : HTMLElement | null) {
 }
 
 export function selectArtwork() {
-  if (aiSelected == -1) {
+  if (aiSelected == -1 || resultUpdated == -1) {
     return;
   } else if (aiSelected == 1) {
     revealElem(document.getElementById('resultAI'));
@@ -67,20 +132,24 @@ export function selectArtwork() {
   }
   
   document.getElementById('gallery')?.classList.add('hidden');
+  aiSelected = -1;
+
 }
 
 export function updateResult(card: Art) {
+  console.log(aiSelected);
   aiSelected = + card.ai;
-  selectedID = card.id;
   // update summary card
   var img = document.getElementById('resultImg') as HTMLImageElement;
   var title = document.getElementById('resultTitle');
-  var description = document.getElementById('resultDescription');
   img.src = card.image.src;
   title!.innerText = card.title;
+  resultUpdated = 1;
+  console.log(aiSelected);
 }
   
 export function Artwork(card: Art) {
+  console.log(card.title);
   return (
     <div onClick={() => updateResult(card)} className="group m-4 mt-4 mb-4 relative w-[330px] transition-all hover:w-[495px] duration-500">
       <img src={frame2.src} className="relative h-[330px] w-[400px] group-hover:h-[495px] group-hover:w-[600px] transition-all duration-500"/>
@@ -93,7 +162,7 @@ export function Result() {
   return (
     <div id="testResultSummary" className="bg-black w-2/5 text-white flex flex-col justify-center items-center m-0 rounded-r-[2em]">
       <div id="spacer" className="p-10">
-        <img id='resultImg' src={testGallery[0].image.src} className="w-[300px] h-[300px] object-cover border-2 border-slate-100"/>
+        <img id='resultImg' src={galleries[0][0].image.src} className="w-[300px] h-[300px] object-cover border-2 border-slate-100"/>
       </div>
       <div id='textSpacer' className="mb-5 text-center">
         <p id="resultTitle" className="mb-5">Test artist</p>
@@ -103,7 +172,17 @@ export function Result() {
 }
 
 export default function Gallery() {
-  const cards = testGallery;
+  const [gallery, setGallery] = React.useState<Array<Art>>();
+
+  React.useEffect(() => {
+    const randint = Math.floor(Math.random() * galleries.length);
+    const cards = galleries[randint];
+    setGallery(cards);
+  }, []);
+  
+  if (gallery == null) {
+    return;
+  }
   return (
     <div id="curaitor" className="flex items-center h-3/4">
       <div id="gallery" className="z-40">
@@ -111,15 +190,15 @@ export default function Gallery() {
           <div id="artwork" className="flex flex-col md:flex-row md:mt-0 justify-between items-center">
             <input className="peer/art1 hidden" id="art1" type="radio" name="artsel" value="1"></input>
             <label htmlFor="art1" className="drop-shadow-lg brightness-90 rounded-3xl border-2 border-transparent peer-checked/art1:border-2 peer-checked/art1:border-yellow-500 peer-checked/art1:brightness-100">
-              <Artwork {...cards[0]} />
+              <Artwork {...gallery[0]} />
             </label>
             <input className="peer/art2 hidden" id="art2" type="radio" name="artsel" value="2"></input>
             <label htmlFor="art2" className="drop-shadow-lg brightness-90 rounded-3xl border-2 border-transparent peer-checked/art2:border-2 peer-checked/art2:border-yellow-500 peer-checked/art2:brightness-100">
-              <Artwork {...cards[1]}/>
+              <Artwork {...gallery[1]}/>
             </label>
             <input className="peer/art3 hidden" id="art3" type="radio" name="artsel" value="3"></input>
             <label htmlFor="art3" className="drop-shadow-lg brightness-90 rounded-3xl border-2 border-transparent peer-checked/art3:border-2 peer-checked/art3:border-yellow-500 peer-checked/art3:brightness-100">
-              <Artwork {...cards[2]}/>
+              <Artwork {...gallery[2]}/>
             </label>
           </div>
 
