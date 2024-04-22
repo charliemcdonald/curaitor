@@ -4,16 +4,16 @@ import { StaticImageData } from 'next/image';
 import Oil1 from '@/src/Oil1.webp'
 import Oil2 from '@/src/Oil2.webp'
 import Oil4 from '@/src/Oil4.png'
+import aiOil5 from '@/src/aiOil5.webp'
 import RealOil1 from '@/src/RealOil1.jpeg'
 import RealOil2 from '@/src/RealOil2.jpeg'
 import RealOil3 from '@/src/RealOil3.jpeg'
 import RealOil4 from '@/src/RealOil4.jpeg'
 import RealOil5 from '@/src/RealOil5.jpeg'
 import RealOil6 from '@/src/RealOil6.jpeg'
+import RealOil7 from '@/src/RealOil7.jpg'
+import RealOil8 from '@/src/RealOil8.jpg'
 import frame2 from '@/src/frame2.png'
-import frame1 from '@/src/frame1.png'
-import ropes from '@/src/ropes.png'
-import test from 'node:test';
 
 var aiSelected = -1;
 var resultUpdated = -1;
@@ -42,6 +42,13 @@ const oilAI2 = {
 const oilAI3 = {
   id: 8,
   image: Oil1,
+  ai: true,
+  title: 'AI Generated',
+}
+
+const oilAI4 = {
+  id: 11,
+  image: aiOil5,
   ai: true,
   title: 'AI Generated',
 }
@@ -88,11 +95,19 @@ const oilReal6 = {
   title: 'Saint Lucy by Francesco del Cossa',
 }
 
-const testGallery = [
-  oilAI1,
-  oilReal1,
-  oilReal2,
-]
+const oilReal7 = {
+  id: 9,
+  image: RealOil7,
+  ai: false,
+  title: 'The Holy Family by Giulio Romano'
+}
+
+const oilReal8 = {
+  id: 10,
+  image: RealOil8,
+  ai: false,
+  title: 'Lady with an Ermine by Leonardo da Vinci'
+}
 
 const galleries = [
   [
@@ -109,6 +124,11 @@ const galleries = [
     oilReal3,
     oilReal5,
     oilAI3,
+  ],
+  [
+    oilAI4,
+    oilReal7,
+    oilReal8,
   ],
 ]
 
