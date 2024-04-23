@@ -5,7 +5,7 @@ import gallieries from '@/images';
 import frame2 from '@/src/frame2.png'
 
 var aiSelected = -1;
-var resultUpdated = -1;
+var previousGallery = -1;
 
 type Art = {
   id: number;
@@ -27,7 +27,7 @@ export function revealElem(elem : HTMLElement | null) {
 }
 
 export function selectArtwork() {
-  if (aiSelected == -1 || resultUpdated == -1) {
+  if (aiSelected == -1) {
     return;
   } else if (aiSelected == 1) {
     revealElem(document.getElementById('resultAI'));
@@ -41,15 +41,12 @@ export function selectArtwork() {
 }
 
 export function updateResult(card: Art) {
-  console.log(aiSelected);
   aiSelected = + card.ai;
   // update summary card
   var img = document.getElementById('resultImg') as HTMLImageElement;
   var title = document.getElementById('resultTitle');
   img.src = card.image.src;
   title!.innerText = card.title;
-  resultUpdated = 1;
-  console.log(aiSelected);
 }
   
 export function Artwork(card: Art) {
@@ -79,7 +76,10 @@ export default function Gallery() {
   const [gallery, setGallery] = React.useState<Array<Art>>();
 
   React.useEffect(() => {
-    const randint = Math.floor(Math.random() * galleries.length);
+    var randint = -1;
+    while (randint == previousGallery) {
+      randint = Math.floor(Math.random() * galleries.length);
+    }
     const cards = galleries[randint];
     setGallery(cards);
   }, []);
@@ -88,7 +88,7 @@ export default function Gallery() {
     return;
   }
   return (
-    <div id="curaitor" className="flex items-center h-3/4">
+    <div id="curaitor" className="flex items-center h-3/4 mt-10 tall:mt-0">
       <div id="gallery" className="z-40">
         <form className="items-center"> {/* Sumbission Form to Select AI art*/}
           <div id="artwork" className="flex flex-col md:flex-row md:mt-0 justify-between items-center">
