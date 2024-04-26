@@ -55,7 +55,7 @@ export function updateResult(card: Art) {
 export function Artwork(card: Art) {
   console.log(card.title);
   return (
-    <div onClick={() => updateResult(card)} className="group m-4 mt-4 mb-4 relative w-[330px] transition-all md:hover:w-[495px] duration-500">
+    <div onClick={() => updateResult(card)} className="group relative w-[330px] transition-all md:hover:w-[495px] duration-500">
       <img src={frame2.src} className="relative h-[330px] w-[400px] md:group-hover:h-[495px] md:group-hover:w-[600px] transition-all duration-500"/>
       <img src={card.image.src} className='group h-[250px] w-[200px] absolute top-[40px] right-[65px] object-cover md:group-hover:w-[300px] md:group-hover:h-[375px] md:group-hover:top-[60px] md:group-hover:right-[98px] transition-all duration-500'/>
     </div>
@@ -93,7 +93,8 @@ export default function Gallery() {
   return (
     <div id="curaitor" className="flex items-center h-3/4 mt-0">
       <div id="gallery" className="z-40 flex flex-col">
-        <div className='z-40 absolute ml-auto right-[210px] bottom-[110px]'><Modal /></div>
+        {/* About / Help Button */}
+        
         
         <div className='h-[500px] w-screen flex justify-center items-center'>
         <form className="items-center"> {/* Sumbission Form to Select AI art*/}
@@ -112,8 +113,11 @@ export default function Gallery() {
             </label>
           </div>
 
-          <div id="submit" className='flex flex-col items-center justify-center m-10'>
+          <div id="submit" className='flex items-center justify-center'>
             <button type="button" className="text-white bg-black p-3 border-2 block rounded-full border-black" onClick={selectArtwork}>Submit</button>
+            <div className='z-40 m-3  mt-7 flex justify-center'>
+              <Modal />
+            </div>
           </div>
         </form>
         </div>
