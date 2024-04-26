@@ -1,8 +1,12 @@
 'use client'
 import * as React from 'react';
 import { StaticImageData } from 'next/image';
+import Modal from '@/components/ui/modal'
+import 'reactjs-popup/dist/index.css';
 import gallieries from '@/images';
 import frame2 from '@/src/frame2.png'
+import fire from '@/src/fire.gif'
+import { ClickAwayListener } from '@mui/material';
 
 var aiSelected = -1;
 var previousGallery = -1;
@@ -37,7 +41,6 @@ export function selectArtwork() {
   
   document.getElementById('gallery')?.classList.add('hidden');
   aiSelected = -1;
-
 }
 
 export function updateResult(card: Art) {
@@ -88,10 +91,13 @@ export default function Gallery() {
     return;
   }
   return (
-    <div id="curaitor" className="flex items-center h-3/4 mt-10 tall:mt-0">
-      <div id="gallery" className="z-40">
+    <div id="curaitor" className="flex items-center h-3/4 mt-0">
+      <div id="gallery" className="z-40 flex flex-col">
+        <div className='z-40 absolute ml-auto right-[210px] bottom-[110px]'><Modal /></div>
+        
+        <div className='h-[500px] w-screen flex justify-center items-center'>
         <form className="items-center"> {/* Sumbission Form to Select AI art*/}
-          <div id="artwork" className="flex flex-col md:flex-row md:mt-0 justify-between items-center">
+          <div id="artwork" className="flex flex-col columns-[10rem] md:flex-row md:mt-0 justify-between items-center align-middle h-[500px]">
             <input className="peer/art1 hidden" id="art1" type="radio" name="artsel" value="1"></input>
             <label htmlFor="art1" className="drop-shadow-lg brightness-90 rounded-3xl border-2 border-transparent peer-checked/art1:border-2 peer-checked/art1:border-yellow-500 peer-checked/art1:brightness-100">
               <Artwork {...gallery[0]} />
@@ -110,6 +116,7 @@ export default function Gallery() {
             <button type="button" className="text-white bg-black p-3 border-2 block rounded-full border-black" onClick={selectArtwork}>Submit</button>
           </div>
         </form>
+        </div>
       </div>
       <div id="resultAI" className="transition-opacity duration-1000 opacity-0 absolute items-center">
         <div className="md:w-[550px] md:h-[350px] drop-shadow-lg bg-slate-100 rounded-[2em] flex flex-col items-center justify-center">
