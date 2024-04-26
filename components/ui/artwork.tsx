@@ -96,9 +96,9 @@ export default function Gallery() {
         {/* About / Help Button */}
         
         
-        <div className='h-[500px] w-screen flex justify-center items-center'>
+        <div className='md:h-[500px] h-full w-screen flex justify-center items-center'>
         <form className="items-center"> {/* Sumbission Form to Select AI art*/}
-          <div id="artwork" className="flex flex-col columns-[10rem] md:flex-row md:mt-0 justify-between items-center align-middle h-[500px]">
+          <div id="artwork" className="flex flex-col columns-[10rem] md:flex-row md:mt-0 justify-between items-center align-middle md:h-[500px]">
             <input className="peer/art1 hidden" id="art1" type="radio" name="artsel" value="1"></input>
             <label htmlFor="art1" className="drop-shadow-lg brightness-90 rounded-3xl border-2 border-transparent peer-checked/art1:border-2 peer-checked/art1:border-yellow-500 peer-checked/art1:brightness-100">
               <Artwork {...gallery[0]} />
